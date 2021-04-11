@@ -163,3 +163,44 @@ const Paris ={
 Paris.numPerHo()
 Paris.mltiplyAvgAndRandom()
 Paris.listelement()
+
+const Lima ={
+    location:'Lima',
+    min:2,
+    max:16,
+    avg:4.6,
+    numPersonPerH:[],
+    avgCookiesPerH:[],
+    numPerHo:function(){
+     for (let i=0;i<time.length;i++) {
+       this.numPersonPerH.push(this.randomValue(this.min,this.max))  
+     }
+     console.log(this.numPersonPerH);  
+    },
+    randomValue:function (min, max) {
+       return Math.floor(Math.random() * (max - min + 1) + min);
+    },
+    mltiplyAvgAndRandom:function(){
+        for (let i = 0; i < this.numPersonPerH.length; i++) {  
+            this.avgCookiesPerH.push(Math.floor(this.avg*this.numPersonPerH[i]))
+        }
+        console.log(this.avgCookiesPerH);
+    },
+    listelement:function(){
+        let cont = document.getElementById('first');
+        let h2 =document.createElement('h2');
+        cont.appendChild(h2);
+        h2.textContent=this.location;
+        let ul=document.createElement('ul')
+        cont.appendChild(ul);
+        let li=null;
+        for (let i = 0; i < time.length; i++) {
+            li=document.createElement('li');
+            cont.appendChild(li);
+            li.textContent=[time[i]+' : '+this.avgCookiesPerH[i]+' cookies'];
+        }
+    }
+}
+Lima.numPerHo()
+Lima.mltiplyAvgAndRandom()
+Lima.listelement()
