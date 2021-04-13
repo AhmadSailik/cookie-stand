@@ -40,48 +40,67 @@ Cookies.prototype.calAvgCookiesPerH=function(){
     console.log(this.avgCookiesPerH);
 
 }
-
-Cookies.prototype.headerRow=function(){
-    let cont = document.getElementById('first');
-    let tableEl =document.createElement('table');
+var cont = document.getElementById('first');
+    var tableEl =document.createElement('table');
     cont.appendChild(tableEl);
-    let trEl=document.createElement('tr');
+    var trEl=document.createElement('tr');
     tableEl.appendChild(trEl);
-    let tdEl=document.createElement('td')
-    trEl.appendChild(tdEl)
-    tdEl.textContent='                '
-    for (let i = 0; i < time.length; i++) {
-    let thEl=document.createElement('th')
+    var thEl=document.createElement('th')
+    trEl.appendChild(thEl)
+    var trEl2=document.createElement('tr');
+    tableEl.appendChild(trEl2);
+    var thEl2=document.createElement('th')
+    trEl2.appendChild(thEl2)
+    var trEl2=document.createElement('tr');
+    tableEl.appendChild(trEl2);
+    var thEl2=document.createElement('th')
+    trEl2.appendChild(thEl2)
+
+for (let i = 0; i < time.length; i++) {
+    var thEl=document.createElement('th')
     trEl.appendChild(thEl)
     thEl.textContent=time[i]
     }
-    let thEl=document.createElement('th')
+    var thEl=document.createElement('th')
     trEl.appendChild(thEl)
     thEl.textContent='Total'
-
-    for(let i=0;i<this.location.length;i++){
-    let trEl2=document.createElement('tr');
+    for(let i=0;i<locations.length;i++){
+    var trEl2=document.createElement('tr');
     tableEl.appendChild(trEl2);
-    let thEl2=document.createElement('th')
+    var thEl2=document.createElement('th')
     trEl2.appendChild(thEl2)
-    thEl2.textContent=this.location[i]
+    thEl2.textContent=locations[i]
+    }
+Cookies.prototype.headerRow=function(){
+    
+    var tdEl=document.createElement('td')
+    trEl.appendChild(tdEl)
+    tdEl.textContent='                '
+    
+    var trEl2=document.createElement('tr');
+    tableEl.appendChild(trEl2);
+    var thEl2=document.createElement('th')
+    trEl2.appendChild(thEl2)
+    
+    
     for(let i=0;i<time.length;i++){
-    let tdEl2=document.createElement('td')
+    var tdEl2=document.createElement('td')
     trEl2.appendChild(tdEl2)
     tdEl2.textContent=this.avgCookiesPerH[i]
     }
-    let tdEl2=document.createElement('td')
+    var tdEl2=document.createElement('td')
     trEl2.appendChild(tdEl2)
     tdEl2.textContent=this.Total
     }
- }
+    
 
 for(let i=0 ;i<sum.length;i++){
     sum[i].calNumPersonPerH();
     sum[i].calAvgCookiesPerH();
     sum[i].headerRow();
-   
+     
 }
+
 // let loc1 =new Cookies('seattle',2.3,65,6.3)
 // let loc2 =new Cookies('Tokyo',3,24,1.2)
 // let loc3 =new Cookies('Dubai',11,38,3.7)
@@ -399,4 +418,3 @@ for(let i=0 ;i<sum.length;i++){
 // }
 // College.prototype.talk =function(){
 //     console.log(`${this.name} is talking about his ${this.age} all the time`);
-// }
