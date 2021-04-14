@@ -3,11 +3,8 @@ function randomValue(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
 let time=['6:00am','7:00am','8:00am','9:00am','10:00am','11:00am','12:00pm','1:00pm','2:00pm','3:00pm','4:00pm','5:00pm','6:00pm','7:00pm']
-let locations=['seattle','Tokyo','Dubai','Paris','Lima']
-let mins=[2.3,3,11,20,2]
-let maxs=[65,24,38,38,16]
-let avgs=[6.3,1.2,3.7,2.3,4.6]
-let dfin=[]
+
+//let dfin=[]
 let sum=[]
 function Cookies (location,min,max,avg){
     this.location=location;
@@ -20,10 +17,13 @@ function Cookies (location,min,max,avg){
     this.totals=[]
     sum.push(this);
 }
+let loc1 =new Cookies('seattle',2.3,65,6.3)
+let loc2 =new Cookies('Tokyo',3,24,1.2)
+let loc3 =new Cookies('Dubai',11,38,3.7)
+let loc4 =new Cookies('Paris',20,38,2.3)
+let loc5 =new Cookies('Lima',2,16,4.6)
 
-for(let i=0;i<locations.length;i++){
-    dfin.push(new Cookies(locations[i],mins[i],maxs[i],avgs[i])) 
-}
+
 console.log(sum);
 Cookies.prototype.calNumPersonPerH=function(){
     for (let i=0;i<time.length;i++){ 
@@ -40,72 +40,87 @@ Cookies.prototype.calAvgCookiesPerH=function(){
     console.log(this.avgCookiesPerH);
 
 }
-var cont = document.getElementById('first');
-    var tableEl =document.createElement('table');
-    cont.appendChild(tableEl);
-    var trEl=document.createElement('tr');
-    tableEl.appendChild(trEl);
-    var thEl=document.createElement('th')
-    trEl.appendChild(thEl)
-    var trEl2=document.createElement('tr');
-    tableEl.appendChild(trEl2);
-    var thEl2=document.createElement('th')
-    trEl2.appendChild(thEl2)
-    var trEl2=document.createElement('tr');
-    tableEl.appendChild(trEl2);
-    var thEl2=document.createElement('th')
-    trEl2.appendChild(thEl2)
+let cont =document.getElementById('first')
+let table=document.createElement('table')
+cont.appendChild(table)
 
-for (let i = 0; i < time.length; i++) {
-    var thEl=document.createElement('th')
-    trEl.appendChild(thEl)
-    thEl.textContent=time[i]
-    }
-    var thEl=document.createElement('th')
-    trEl.appendChild(thEl)
-    thEl.textContent='Total'
-    for(let i=0;i<locations.length;i++){
-    var trEl2=document.createElement('tr');
-    tableEl.appendChild(trEl2);
-    var thEl2=document.createElement('th')
-    trEl2.appendChild(thEl2)
-    thEl2.textContent=locations[i]
-    }
-Cookies.prototype.headerRow=function(){
-    
-    var tdEl=document.createElement('td')
-    trEl.appendChild(tdEl)
-    tdEl.textContent='                '
-    
-    var trEl2=document.createElement('tr');
-    tableEl.appendChild(trEl2);
-    var thEl2=document.createElement('th')
-    trEl2.appendChild(thEl2)
-    
-    
-    for(let i=0;i<time.length;i++){
-    var tdEl2=document.createElement('td')
-    trEl2.appendChild(tdEl2)
-    tdEl2.textContent=this.avgCookiesPerH[i]
-    }
-    var tdEl2=document.createElement('td')
-    trEl2.appendChild(tdEl2)
-    tdEl2.textContent=this.Total
-    }
-    
+function headerRow(){
+let firstRow=document.createElement('tr')
+table.appendChild(firstRow)
+let emptyCell=document.createElement('th')
+firstRow.appendChild(emptyCell)
+emptyCell.textContent=''
 
-for(let i=0 ;i<sum.length;i++){
-    sum[i].calNumPersonPerH();
-    sum[i].calAvgCookiesPerH();
-    sum[i].headerRow();
-     
+let headingRow=null
+    for (let i = 0; i < time.length; i++){
+        headingRow=document.createElement('th')
+        firstRow.appendChild(headingRow)
+        headingRow.textContent=time[i]
+    }
+    headingRow=document.createElement('th')
+    firstRow.appendChild(headingRow)
+    headingRow.textContent='Daily Location Total'
 }
 
-// let loc1 =new Cookies('seattle',2.3,65,6.3)
-// let loc2 =new Cookies('Tokyo',3,24,1.2)
-// let loc3 =new Cookies('Dubai',11,38,3.7)
-// let loc4 =new Cookies('Paris',20,38,2.3)
-// let loc5 =new Cookies('Lima',2,16,4.6)
+Cookies.prototype.rander=function(){
+    let tr2=document.createElement('tr')
+    table.appendChild(tr2)
+    let th2=null
+    let td1=null
+    
+    th2=document.createElement('th')
+    tr2.appendChild(th2)
+    th2.textContent=this.location
+    for (let i = 0; i < this.avgCookiesPerH.length; i++){
+    td1 =document.createElement('td')
+    tr2.appendChild(td1)
+    td1.textContent=this.avgCookiesPerH[i]
+    }
+    let th3 =document.createElement('th')
+    tr2.appendChild(th3)
+    th3.textContent=this.Total
+ 
+}
+
+function footerRow(){
+let lastRow=document.createElement('tr')
+table.appendChild(lastRow)
+let th3=document.createElement('th')
+lastRow.appendChild(th3)
+th3.textContent='Totals'
+let sums=0
+let td2=null
+for (let i = 0; i < time.length; i++){
+    sums=loc1.avgCookiesPerH[i]+loc2.avgCookiesPerH[i]+loc3.avgCookiesPerH[i]
+    +loc4.avgCookiesPerH[i]+loc5.avgCookiesPerH[i]
+    td2=document.createElement('td')
+    lastRow.appendChild(td2)
+    td2.textContent=sums
+    
+}
+}
+
+headerRow()
+for (let i = 0; i < sum.length; i++){
+    sum[i].calNumPersonPerH();
+    sum[i].calAvgCookiesPerH();
+    sum[i].rander(); 
+}
+footerRow()
+// loc1.calc()
+// loc2.calc()
+// loc3.calc()
+// loc4.calc()
+// loc5.calc()
+
+// let locations=['seattle','Tokyo','Dubai','Paris','Lima']
+// let mins=[2.3,3,11,20,2]
+// let maxs=[65,24,38,38,16]
+// let avgs=[6.3,1.2,3.7,2.3,4.6]
+
+// for(let i=0;i<locations.length;i++){
+//     dfin.push(new Cookies(locations[i],mins[i],maxs[i],avgs[i])) 
+// }
 
 //headerRow()
     // let headerRow=function(){
