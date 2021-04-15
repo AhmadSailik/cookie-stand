@@ -114,12 +114,13 @@ function handleSubmiting(event){
     //console.log(typeof(maxValue));
     let avgValue=parseFloat(event.target.avgField.value)
     //console.log(typeof(avgValue) );
+    table.removeChild(table.lastChild)
     let newLocation=new Cookies(locationValue,minValue,maxValue,avgValue)
     console.log(newLocation);
     newLocation.calNumPersonPerH()
     newLocation.calAvgCookiesPerH()
     newLocation.rander()
-    
+    footerRow()
 }
 
 
