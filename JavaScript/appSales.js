@@ -100,13 +100,40 @@ for (let i = 0; i < time.length; i++){
 }
 }
 
+const form=document.getElementById('second') 
+form.addEventListener('submit',handleSubmiting)
+
+function handleSubmiting(event){
+    event.preventDefault()
+   
+    let locationValue=event.target.locationField.value
+    //console.log(locationValue);
+    let minValue=parseInt( event.target.minField.value)
+    //console.log(minValue);
+    let maxValue=parseInt(event.target.maxField.value) 
+    //console.log(typeof(maxValue));
+    let avgValue=parseFloat(event.target.avgField.value)
+    //console.log(typeof(avgValue) );
+    let newLocation=new Cookies(locationValue,minValue,maxValue,avgValue)
+    console.log(newLocation);
+    newLocation.calNumPersonPerH()
+    newLocation.calAvgCookiesPerH()
+    newLocation.rander()
+    
+}
+
+
+
 headerRow()
 for (let i = 0; i < sum.length; i++){
     sum[i].calNumPersonPerH();
     sum[i].calAvgCookiesPerH();
     sum[i].rander(); 
 }
+
 footerRow()
+
+
 // loc1.calc()
 // loc2.calc()
 // loc3.calc()
